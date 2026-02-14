@@ -1,164 +1,112 @@
-import React from 'react'
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../store/auth';
-import register from "../assets/images/register.png"
-import { toast } from 'react-toastify';
-
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
+import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 export const Register = () => {
-    const [user, setUser] = useState({
-        username: "",
-        email: "",
-        phone: "",
-        password: ""
-    })
+  const [user, setUser] = useState({ username: "", email: "", phone: "", password: "" });
+  const navigate = useNavigate();
+  const { storeTokenInLS, baseURL } = useAuth();
 
-    const navigate = useNavigate();
-    const {saveTokenInLocalStora, baseURL} = useAuth();
+  const handleInput = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    setUser({ ...user, [name]: value });
+  };
 
-    // const saveTokenInLocalStora = (token) => {
-    //     return localStorage.setItem("token", token);
-    // }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${baseURL}/api/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
 
-    // handling input value
-    const handleInput = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setUser({ ...user, [name]: value })
+      const res_data = await response.json();
+
+      if (response.ok) {
+        storeTokenInLS(res_data.token);
+        toast.success("Registration Successful");
+        navigate("/");
+      } else {
+        toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message);
+      }
+    } catch (error) {
+      console.log("register", error);
     }
+  };
 
-    // handling the form submission
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     console.log(user);
-    //     try {
-    //         const response = await fetch('http://localhost:5000/api/auth/register', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(user)
-    //         })
-    //         console.log(response);
-    //         // const data = await response.json();
-    //         // console.log(data);
-    //     } catch (error) {
-    //         console.log("Regi Err",error);
-    //     }
-    // }
-    // handle form on submit
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log(user);
+  return (
+    <section className="min-h-screen flex items-center justify-center bg-gray-50 px-6 py-20">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="w-full max-w-md bg-white p-10 rounded-[35px] shadow-sm border border-gray-100"
+      >
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h1>
+          <p className="text-gray-500 text-sm tracking-wide uppercase font-semibold">Join the journey</p>
+        </div>
 
-        try {
-            const response = await fetch(`${baseURL}/api/auth/register`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(user),
-            });
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1 ml-1">Username</label>
+            <input
+              type="text"
+              name="username"
+              placeholder="ram_singh"
+              value={user.username}
+              onChange={handleInput}
+              className="w-full bg-gray-50 border border-gray-100 px-5 py-3.5 rounded-2xl focus:outline-none focus:border-blue-600 transition-all"
+            />
+          </div>
 
-            const responseData = await response.json();
-            console.log("Response from server :- ",responseData);
-            
-            if (response.ok) {
-                // store the token in Local Storage
-                saveTokenInLocalStora(responseData.token);
-                // localStorage.setItem("Res from server token", responseData.token);
-                setUser({ username: "", email: "", phone: "", password: "" });
-                toast.success("Registration Successful");
-                navigate("/");
-            } else {
-                toast.error(responseData.extraDetails ? responseData.extraDetails.join(', ') : responseData.message);
-                console.log("error inside response ", error);
-            }
-        } catch (error) {
-            console.error("Register Error:- ", error);
-        }
-    };
+          <div>
+            <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1 ml-1">Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="email@example.com"
+              value={user.email}
+              onChange={handleInput}
+              className="w-full bg-gray-50 border border-gray-100 px-5 py-3.5 rounded-2xl focus:outline-none focus:border-blue-600 transition-all"
+            />
+          </div>
 
-    return (
-        <>
-            <section>
-                <main>
-                    <div className="section-registration">
-                        <div className="container grid grid-two-cols">
-                            <div className="registation-image reg-img">
-                                <img
-                                    src={register}
-                                    alt="a girl trying to do registration"
-                                    width='500'
-                                    height='500'
-                                />
-                            </div>
-                            {/* regi */}
-                            <div className="registation-form">
-                                <h1 className='main-heading mb-3'>Registration Form</h1>
-                                <br />
-                                <form onSubmit={handleSubmit}>
-                                    <div>
-                                        <label htmlFor="username">username</label>
-                                        <input
-                                            type="text"
-                                            name='username'
-                                            placeholder='username'
-                                            id='username'
-                                            required
-                                            autoComplete='off'
-                                            value={user.username}
-                                            onChange={handleInput}
-                                        />
+          <div>
+            <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1 ml-1">Phone</label>
+            <input
+              type="number"
+              name="phone"
+              placeholder="9876543210"
+              value={user.phone}
+              onChange={handleInput}
+              className="w-full bg-gray-50 border border-gray-100 px-5 py-3.5 rounded-2xl focus:outline-none focus:border-blue-600 transition-all"
+            />
+          </div>
 
-                                        <label htmlFor="email">email</label>
-                                        <input
-                                            type="eamil"
-                                            name='email'
-                                            placeholder='email'
-                                            id='email'
-                                            required
-                                            autoComplete='off'
-                                            value={user.email}
-                                            onChange={handleInput}
-                                        />
+          <div>
+            <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-1 ml-1">Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              value={user.password}
+              onChange={handleInput}
+              className="w-full bg-gray-50 border border-gray-100 px-5 py-3.5 rounded-2xl focus:outline-none focus:border-blue-600 transition-all"
+            />
+          </div>
 
-                                        <label htmlFor="phone">phone</label>
-                                        <input
-                                            type="phone"
-                                            name='phone'
-                                            // value={} 
-                                            placeholder='phone'
-                                            id='phone'
-                                            required
-                                            autoComplete='off'
-                                            value={user.phone}
-                                            onChange={handleInput}
-                                        />
-
-                                        <label htmlFor="password">password</label>
-                                        <input
-                                            type="password"
-                                            name='password'
-                                            // value={} 
-                                            placeholder='password'
-                                            id='password'
-                                            required
-                                            autoComplete='off'
-                                            value={user.password}
-                                            onChange={handleInput}
-                                        />
-                                    </div>
-
-                                    <br />
-                                    <button type="submit" className='btn btn-submit'>Register Now</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </section>
-        </>
-    )
-}
+          <button
+            type="submit"
+            className="w-full bg-gray-900 text-white py-4 rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-lg mt-4"
+          >
+            Register Now
+          </button>
+        </form>
+      </motion.div>
+    </section>
+  );
+};
