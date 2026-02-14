@@ -6,19 +6,19 @@ import { Contact } from './pages/Contact';
 import { Service } from './pages/Service';
 import { Register } from './pages/Register';
 import { Login } from './pages/Login';
-import { NavBar } from './components/NavBar';
 import { PageNotFound } from './pages/PageNotFound';
 import { Footer } from './components/footer/Footer';
 import { Logout } from './pages/Logout';
 import { AdminLayout } from './components/layouts/Admin-Layout';
 import { AdminUsers } from './pages/Admin-Users';
 import { AdminContacts } from './pages/Admin-Contacts';
+import { Navbar } from './components/Navbar';
 
  const App = () => {
   return (
     <>
       <BrowserRouter>
-        <NavBar />
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
