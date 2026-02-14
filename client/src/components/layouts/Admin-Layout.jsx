@@ -23,6 +23,9 @@ export const AdminLayout = () => {
           <NavLink to="/service" className="px-4 py-2 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-100">
             📁 View Projects
           </NavLink>
+          <NavLink to="/admin/projects/add" className={({isActive}) => `px-4 py-2 rounded-xl text-sm font-semibold transition-all ${isActive ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
+            ➕ Add Project
+          </NavLink>
         </nav>
       </aside>
 

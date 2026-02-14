@@ -13,6 +13,7 @@ import { AdminLayout } from './components/layouts/Admin-Layout';
 import { AdminUsers } from './pages/Admin-Users';
 import { AdminContacts } from './pages/Admin-Contacts';
 import { Navbar } from './components/Navbar';
+import { AdminProjectsAdd } from './pages/Admin-Projects-Add';
 
  const App = () => {
   return (
@@ -31,6 +32,7 @@ import { Navbar } from './components/Navbar';
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="users" element={<AdminUsers />} />
             <Route path="contacts" element={<AdminContacts />} />
+            <Route path="projects/add" element={<AdminProjectsAdd />} />
           </Route>
         </Routes>
         <Footer/>

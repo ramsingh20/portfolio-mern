@@ -1,3 +1,4 @@
+import { Service } from '../models/service-model.js';
 import { User } from '../models/user-model.js';
 
 const getAllUsers = async (req, res, next) => {
@@ -15,6 +16,16 @@ const getAllUsers = async (req, res, next) => {
     }
 };
 
+const addService = async (req, res) => {
+  try {
+    const response = req.body;
+    await Service.create(response);
+    return res.status(200).json({ message: "Project added successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: "Project not added" });
+  }
+};
 
 
-export { getAllUsers };
+
+export { getAllUsers, addService };
