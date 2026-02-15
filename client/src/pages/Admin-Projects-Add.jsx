@@ -43,39 +43,92 @@ export const AdminProjectsAdd = () => {
   };
 
   return (
-    <section className="p-4 md:p-8">
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        <div className="mb-10 text-center">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Upload <span className="text-blue-600">Project</span></h1>
-          <p className="text-gray-400 text-xs uppercase tracking-widest font-bold">Admin Dashboard Only</p>
-        </div>
+    <section className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-white pt-8 pb-20 px-6">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
+        <motion.div 
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-12 text-center max-w-2xl mx-auto"
+        >
+          <h1 className="text-5xl font-black text-gray-900 mb-3">
+            Upload <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">Project</span>
+          </h1>
+          <p className="text-blue-600 text-sm tracking-[0.15em] uppercase font-bold">🚀 Admin Dashboard Only</p>
+        </motion.div>
         
-        <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-6">
-          <div className="bg-gray-50 p-8 rounded-[35px] border border-gray-100 shadow-sm space-y-6">
-            <div>
-              <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Title</label>
-              <input type="text" name="service" value={data.service} onChange={handleInput} required className="w-full bg-white border border-gray-200 px-5 py-4 rounded-2xl focus:outline-none focus:border-blue-600 transition-all" placeholder="Project name..." />
-            </div>
+        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="bg-white/80 backdrop-blur-md p-12 rounded-3xl border border-gray-200/50 shadow-2xl space-y-6 relative overflow-hidden"
+          >
+            {/* Decorative gradient background */}
+            <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-200 to-blue-50 rounded-full z-0 blur-3xl opacity-40"></div>
+            
+            <div className="relative z-10 space-y-5">
+              {[
+                { name: "service", type: "text", label: "Project Title", placeholder: "E-commerce Platform", description: "Name of your project" },
+                { name: "price", type: "text", label: "Tech Stack", placeholder: "React, Node.js, Tailwind", description: "Technologies used (comma separated)" },
+                { name: "provider", type: "url", label: "GitHub / Live Link", placeholder: "https://github.com/...", description: "Link to repository or live demo" }
+              ].map((field, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + i * 0.08 }}
+                >
+                  <label className="block text-xs font-bold uppercase tracking-[0.1em] text-gray-600 mb-2">{field.label}</label>
+                  <p className="text-xs text-gray-500 mb-2">{field.description}</p>
+                  <motion.input 
+                    whileFocus={{ scale: 1.02 }}
+                    type={field.type} 
+                    name={field.name} 
+                    value={data[field.name]} 
+                    onChange={handleInput} 
+                    required 
+                    className="w-full bg-gray-50 border border-gray-200 px-5 py-3.5 rounded-xl focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-medium"
+                    placeholder={field.placeholder}
+                  />
+                </motion.div>
+              ))}
 
-            <div>
-              <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Tech Stack (comma separated)</label>
-              <input type="text" name="price" value={data.price} onChange={handleInput} required className="w-full bg-white border border-gray-200 px-5 py-4 rounded-2xl focus:outline-none focus:border-blue-600 transition-all" placeholder="e.g. React, Node, Tailwind" />
-            </div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <label className="block text-xs font-bold uppercase tracking-[0.1em] text-gray-600 mb-2">Brief Description</label>
+                <p className="text-xs text-gray-500 mb-2">Explain what your project does</p>
+                <motion.textarea 
+                  whileFocus={{ scale: 1.02 }}
+                  name="description" 
+                  value={data.description} 
+                  onChange={handleInput} 
+                  required 
+                  rows="4" 
+                  className="w-full bg-gray-50 border border-gray-200 px-5 py-3.5 rounded-xl focus:outline-none focus:border-blue-600 focus:bg-white transition-all font-medium resize-none"
+                  placeholder="Describe the project features, functionality, and impact..."
+                />
+              </motion.div>
 
-            <div>
-              <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">GitHub / Live Link</label>
-              <input type="text" name="provider" value={data.provider} onChange={handleInput} required className="w-full bg-white border border-gray-200 px-5 py-4 rounded-2xl focus:outline-none focus:border-blue-600 transition-all" placeholder="https://..." />
+              <motion.button 
+                type="submit"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-4 rounded-xl font-bold hover:shadow-2xl hover:shadow-blue-500/40 transition-all mt-8 border border-blue-500/50 flex justify-center items-center gap-2"
+              >
+                💾 Save Project
+              </motion.button>
             </div>
-
-            <div>
-              <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Brief Description</label>
-              <textarea name="description" value={data.description} onChange={handleInput} required rows="4" className="w-full bg-white border border-gray-200 px-5 py-4 rounded-2xl focus:outline-none focus:border-blue-600 transition-all" placeholder="Explain the project logic..."></textarea>
-            </div>
-
-            <button type="submit" className="w-full bg-gray-900 text-white py-5 rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-xl hover:shadow-blue-100 flex justify-center items-center gap-2">
-              Save Project 💾
-            </button>
-          </div>
+          </motion.div>
         </form>
       </motion.div>
     </section>
