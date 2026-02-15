@@ -2,6 +2,8 @@ import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import { GalaxyBackground } from "../components/GalaxyBackground";
+import { ThreeScene } from "../components/ThreeScene";
+import { StyledBadge } from "../components/StyledBadge";
 import styled from "styled-components";
 
 const Section = styled.div`
@@ -47,9 +49,10 @@ export const Home = () => {
           variants={itemVariants}
           initial="hidden"
           animate="visible"
-          className="bg-gradient-to-r from-purple-600/30 to-blue-600/30 text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-[0.15em] mb-8 border border-purple-400/30 backdrop-blur-md"
+          className="bg-gradient-to-r from-purple-600/30 to-blue-600/30 text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-[0.15em] mb-4 border border-purple-400/30 backdrop-blur-md flex items-center gap-4"
         >
           ✨ Welcome to my universe
+          <StyledBadge className="hidden sm:inline-block">Featured</StyledBadge>
         </motion.div>
 
         {/* Main Heading */}
@@ -67,11 +70,16 @@ export const Home = () => {
           variants={itemVariants}
           initial="hidden"
           animate="visible"
-          className="text-2xl md:text-4xl text-gray-200 font-semibold h-16 flex items-center gap-3"
+          className="text-2xl md:text-4xl text-gray-200 font-semibold h-16 flex items-center gap-3 relative"
         >
           <span>I'm a</span>
           <span className="text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text font-black">{text}</span>
           <Cursor cursorColor="#00d4ff" cursorStyle="|" />
+
+          {/* 3D canvas - visible on md+ */}
+          <div className="hidden md:block absolute right-20 -top-28">
+            <ThreeScene modelScale={0.6} />
+          </div>
         </motion.div>
 
         {/* Short Bio */}

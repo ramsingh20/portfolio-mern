@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../store/auth";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import emailjs from "@emailjs/browser";
 
 const defaultContactFormData = {
   username: "",
@@ -34,6 +35,34 @@ export const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    // Use EmailJS when env variables are provided, otherwise fallback to server API
+    if (SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY) {
+      try {
+        await emailjs.send(
+          SERVICE_ID,
+          TEMPLATE_ID,
+          {
+            from_name: contact.username,
+            from_email: contact.email,
+            message: contact.message,
+          },
+          PUBLIC_KEY
+        );
+        setContact(defaultContactFormData);
+        toast.success("Message sent via EmailJS!");
+        return;
+      } catch (err) {
+        console.warn("EmailJS failed, falling back to API:", err);
+        toast.info("EmailJS failed, trying server...", { autoClose: 1500 });
+      }
+    }
+
+    // Fallback: send to backend API
     try {
       const response = await fetch(`${baseURL}/api/form/contact`, {
         method: "POST",
@@ -44,6 +73,9 @@ export const Contact = () => {
       if (response.ok) {
         setContact(defaultContactFormData);
         toast.success("Message sent successfully!");
+      } else {
+        const errData = await response.json();
+        toast.error(errData?.message || "Message not sent!");
       }
     } catch (error) {
       toast.error("Message not sent!");
