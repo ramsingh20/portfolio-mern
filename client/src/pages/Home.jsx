@@ -11,94 +11,114 @@ export const Home = () => {
     delaySpeed: 1500,
   });
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
+
   return (
-    <main className="min-h-screen bg-white">
-      <section className="container mx-auto px-6 pt-32 pb-20 flex flex-col items-center justify-center text-center">
+    <main className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-white">
+      <section className="container mx-auto px-6 pt-40 pb-20 flex flex-col items-center justify-center text-center">
         {/* Intro Tag */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="bg-blue-50 text-blue-600 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-6"
+          variants={itemVariants}
+          initial="hidden"
+          animate="visible"
+          className="bg-gradient-to-r from-blue-50 to-blue-100 text-blue-600 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-[0.15em] mb-8 border border-blue-200/50 backdrop-blur-sm"
         >
-          Welcome to my universe
+          ✨ Welcome to my universe
         </motion.div>
 
         {/* Main Heading */}
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 tracking-tight"
+          variants={itemVariants}
+          initial="hidden"
+          animate="visible"
+          className="text-5xl md:text-8xl font-black text-gray-900 mb-8 tracking-tighter leading-tight"
         >
-          Hi, I'm <span className="text-blue-600">Ram Singh</span>
+          Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">Ram Singh</span>
         </motion.h1>
 
         {/* Typewriter Section */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-xl md:text-3xl text-gray-500 font-medium h-12"
+          variants={itemVariants}
+          initial="hidden"
+          animate="visible"
+          className="text-2xl md:text-4xl text-gray-700 font-semibold h-16 flex items-center gap-3"
         >
-          I am a <span>{text}</span>
-          <Cursor cursorColor="#2563eb" />
+          <span>I'm a</span>
+          <span className="text-blue-600 font-black">{text}</span>
+          <Cursor cursorColor="#2563eb" cursorStyle="|" />
         </motion.div>
 
         {/* Short Bio */}
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="max-w-2xl text-gray-600 text-lg mt-6 leading-relaxed"
+          variants={itemVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-2xl text-gray-600 text-lg mt-8 leading-relaxed font-medium"
         >
           Mera project logic aur clean design par focused hota hai. Main modern web technologies ka use karke scalable and user-friendly solutions banata hoon.
         </motion.p>
 
         {/* Call to Action Buttons */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="flex flex-wrap gap-4 mt-10"
+          variants={itemVariants}
+          initial="hidden"
+          animate="visible"
+          className="flex flex-wrap gap-6 mt-12 justify-center"
         >
-          <NavLink
-            to="/contact"
-            className="bg-gray-900 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-blue-600 transition-all shadow-lg hover:shadow-blue-200"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            Hire Me
-          </NavLink>
-          <NavLink
-            to="/service"
-            className="border border-gray-200 text-gray-900 px-8 py-3.5 rounded-full font-semibold hover:border-gray-900 transition-all"
+            <NavLink
+              to="/contact"
+              className="inline-block bg-gradient-to-r from-gray-900 to-gray-800 text-white px-10 py-4 rounded-full font-bold hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 backdrop-blur-sm border border-gray-700/50"
+            >
+              💼 Hire Me
+            </NavLink>
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            View Projects
-          </NavLink>
+            <NavLink
+              to="/service"
+              className="inline-block border-2 border-blue-600 text-blue-600 px-10 py-4 rounded-full font-bold hover:bg-blue-50 transition-all duration-300 backdrop-blur-sm hover:shadow-lg hover:shadow-blue-200/50"
+            >
+              🚀 View Projects
+            </NavLink>
+          </motion.div>
         </motion.div>
 
-        {/* Stats / Analytics Section (Minimalist) */}
+        {/* Stats / Analytics Section (Enhanced) */}
         <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 border-t border-gray-100 pt-10 w-full max-w-4xl"
+          variants={itemVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-24 border-t border-gray-200/50 pt-16 w-full max-w-5xl"
         >
-          <div>
-            <h3 className="text-3xl font-bold text-gray-900">5+</h3>
-            <p className="text-gray-500 text-sm uppercase tracking-widest mt-1">Projects</p>
-          </div>
-          <div>
-            <h3 className="text-3xl font-bold text-gray-900">100%</h3>
-            <p className="text-gray-500 text-sm uppercase tracking-widest mt-1">Dedication</p>
-          </div>
-          <div>
-            <h3 className="text-3xl font-bold text-gray-900">24/7</h3>
-            <p className="text-gray-500 text-sm uppercase tracking-widest mt-1">Support</p>
-          </div>
-          <div>
-            <h3 className="text-3xl font-bold text-gray-900">MERN</h3>
-            <p className="text-gray-500 text-sm uppercase tracking-widest mt-1">Stack</p>
-          </div>
+          {[
+            { num: "5+", label: "Projects", icon: "🎯" },
+            { num: "100%", label: "Dedication", icon: "💪" },
+            { num: "24/7", label: "Support", icon: "⚡" },
+            { num: "MERN", label: "Stack", icon: "🛠️" }
+          ].map((stat, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ y: -8, scale: 1.05 }}
+              className="text-center group cursor-pointer"
+            >
+              <div className="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">{stat.icon}</div>
+              <h3 className="text-4xl font-black text-gray-900 group-hover:text-blue-600 transition-colors">{stat.num}</h3>
+              <p className="text-gray-500 text-xs uppercase tracking-[0.15em] mt-2 font-bold">{stat.label}</p>
+            </motion.div>
+          ))}
         </motion.div>
       </section>
     </main>

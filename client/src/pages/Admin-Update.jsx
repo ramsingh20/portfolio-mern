@@ -20,21 +20,16 @@ export const AdminUpdate = () => {
     // get single user data
     const getAllUsersData = async () => {
         try {
-            const response = await fetch(`${baseURL}/api/admin/users${params.id}`, {
+            const response = await fetch(`${baseURL}/api/admin/users/${params.id}`, {
                 method: "GET",
                 headers: {
-                    // "Authorization": `Bearer ${localStorage.getItem("token")}`
                     Authorization: authorizationToken
                 },
             });
 
             const data = await response.json();
-            console.log(`Users single data : ${data}`);
+            console.log(`Users single data : `, data);
             setData(data);
-
-            // if (response.ok) {
-            //     getAllUsersData();
-            // }
 
         } catch (error) {
             console.log(error);
@@ -50,7 +45,7 @@ export const AdminUpdate = () => {
     const handleInput = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        setData({ ...user, [name]: value })
+        setData({ ...data, [name]: value })
     }
 
     // to update data dynamically
@@ -68,12 +63,12 @@ export const AdminUpdate = () => {
             }
         );
 
+        const resData = await response.json();
         if (response.ok) {
             toast.success("User Updated Successfully");
         } else {
-            toast.error("Not Updated:- ",response.message);
+            toast.error(resData?.message || "Not Updated");
         }
-            // const data = await response.json();
         } catch (error) {
             console.log(error);
         }
@@ -87,7 +82,7 @@ export const AdminUpdate = () => {
         </div>
         <div className="container grid grid-two-cols">
             <section className='section-form'>
-                <form onsubmit={handleSubmit} >
+                <form onSubmit={handleSubmit} >
                     <div>
                         <label htmlFor="username">username</label>
                         <input 

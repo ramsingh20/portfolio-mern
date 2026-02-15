@@ -19,9 +19,9 @@ export const AuthContextProvider = ({ children }) => {
     console.log("isLOGGEDIN:- ", isLoggedIn);
 
 
-    const saveTokenInLocalStora = (token) => {
-      setToken(token)
-      return localStorage.setItem("token", token);
+    const storeTokenInLS = (token) => {
+      setToken(token);
+      localStorage.setItem("token", token);
     };
 
     const LogoutUser = () => {
@@ -105,19 +105,19 @@ export const AuthContextProvider = ({ children }) => {
 
 
   return (
-    <AuthContext.Provider value={{ saveTokenInLocalStora, LogoutUser, isLoggedIn, user, services, authorizationToken, isLoading, baseURL }}>
+    <AuthContext.Provider value={{ storeTokenInLS, LogoutUser, isLoggedIn, user, services, authorizationToken, isLoading, baseURL }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
 export const useAuth = () => {
-  const authContextVlaue = useContext(AuthContext);
+  const authContextValue = useContext(AuthContext);
 
-  if (!authContextVlaue) {
+  if (!authContextValue) {
     throw new Error("useAuth must be used within an AuthContextProvider");
   }
 
-  return authContextVlaue;
+  return authContextValue;
 };
 

@@ -9,23 +9,33 @@ export const AdminLayout = () => {
   if (!user.isAdmin) return <Navigate to="/" />;
 
   return (
-    <div className="flex min-h-screen bg-gray-50 pt-20">
+    <div className="flex min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 pt-20">
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-gray-100 p-6 flex flex-col gap-4">
-        <h2 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Admin Panel</h2>
-        <nav className="flex flex-col gap-2">
-          <NavLink to="/admin/users" className={({isActive}) => `px-4 py-2 rounded-xl text-sm font-semibold transition-all ${isActive ? 'bg-blue-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}>
-            👥 Users
-          </NavLink>
-          <NavLink to="/admin/contacts" className={({isActive}) => `px-4 py-2 rounded-xl text-sm font-semibold transition-all ${isActive ? 'bg-blue-600 text-white shadow-md' : 'text-gray-600 hover:bg-gray-100'}`}>
-            ✉️ Messages
-          </NavLink>
-          <NavLink to="/service" className="px-4 py-2 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-100">
-            📁 View Projects
-          </NavLink>
-          <NavLink to="/admin/projects/add" className={({isActive}) => `px-4 py-2 rounded-xl text-sm font-semibold transition-all ${isActive ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100'}`}>
-            ➕ Add Project
-          </NavLink>
+      <aside className="w-64 bg-white/80 backdrop-blur-md border-r border-gray-200/50 p-6 flex flex-col gap-4 shadow-lg">
+        <motion.h2 className="text-xs font-black uppercase tracking-[0.15em] text-blue-600 mb-6 flex items-center gap-2" initial={{ opacity: 0 }}>
+          <span className="w-2 h-2 bg-blue-600 rounded-full" />
+          <span>Admin Control</span>
+        </motion.h2>
+        <nav className="flex flex-col gap-2 space-y-1">
+          {[
+            { to: "/admin/users", icon: "👥", label: "Users" },
+            { to: "/admin/contacts", icon: "✉️", label: "Messages" },
+            { to: "/service", icon: "📁", label: "View Projects" },
+            { to: "/admin/projects/add", icon: "➕", label: "Add Project" }
+          ].map((link, i) => (
+            <NavLink 
+              key={i}
+              to={link.to} 
+              className={({isActive}) => `px-4 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${
+                isActive 
+                  ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg shadow-blue-500/30' 
+                  : 'text-gray-600 hover:bg-gray-100 hover:text-blue-600'
+              }`}
+            >
+              <span className="mr-2">{link.icon}</span>
+              {link.label}
+            </NavLink>
+          ))}
         </nav>
       </aside>
 
@@ -34,7 +44,8 @@ export const AdminLayout = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100"
+          transition={{ duration: 0.6 }}
+          className="bg-white/80 backdrop-blur-md rounded-3xl p-8 shadow-lg border border-gray-200/50 min-h-[80vh]"
         >
           <Outlet />
         </motion.div>
