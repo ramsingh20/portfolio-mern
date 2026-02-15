@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from "styled-components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Home } from './pages/Home';
 import { About } from './pages/About';
@@ -15,10 +16,26 @@ import { AdminContacts } from './pages/Admin-Contacts';
 import { Navbar } from './components/Navbar';
 import { AdminProjectsAdd } from './pages/Admin-Projects-Add';
 import { AdminUpdate } from './pages/Admin-Update';
+// import bg from './assets/images/bg.jpeg'
+
+const Container = styled.div`
+  height: 100vh;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  scrollbar-width: none;
+  color: white;
+  background: url("./assets/images/bg.jpeg");
+  &::-webkit-scrollbar{
+    display: none;
+  }
+`;
+
 
  const App = () => {
+  
   return (
-    <>
+    <Container>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -39,7 +56,7 @@ import { AdminUpdate } from './pages/Admin-Update';
         </Routes>
         <Footer/>
       </BrowserRouter>
-    </>
+    </Container>
   )
 }
 

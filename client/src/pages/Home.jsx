@@ -1,6 +1,22 @@
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
+import { GalaxyBackground } from "../components/GalaxyBackground";
+import styled from "styled-components";
+
+const Section = styled.div`
+  height: 100vh;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  @media only screen and (max-width: 768px) {
+    height: 200vh;
+  }
+`;
+
 
 export const Home = () => {
   const [text] = useTypewriter({
@@ -21,14 +37,17 @@ export const Home = () => {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-white">
-      <section className="container mx-auto px-6 pt-40 pb-20 flex flex-col items-center justify-center text-center">
+    <Section>
+    <main className="min-h-screen bg-black relative overflow-hidden">
+      <GalaxyBackground />
+      
+      <section className="relative z-10 container mx-auto px-6 pt-40 pb-20 flex flex-col items-center justify-center text-center">
         {/* Intro Tag */}
         <motion.div
           variants={itemVariants}
           initial="hidden"
           animate="visible"
-          className="bg-gradient-to-r from-blue-50 to-blue-100 text-blue-600 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-[0.15em] mb-8 border border-blue-200/50 backdrop-blur-sm"
+          className="bg-gradient-to-r from-purple-600/30 to-blue-600/30 text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-[0.15em] mb-8 border border-purple-400/30 backdrop-blur-md"
         >
           ✨ Welcome to my universe
         </motion.div>
@@ -38,9 +57,9 @@ export const Home = () => {
           variants={itemVariants}
           initial="hidden"
           animate="visible"
-          className="text-5xl md:text-8xl font-black text-gray-900 mb-8 tracking-tighter leading-tight"
+          className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter leading-tight drop-shadow-lg"
         >
-          Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">Ram Singh</span>
+          Hi, I'm <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent animate-pulse">Ram Singh</span>
         </motion.h1>
 
         {/* Typewriter Section */}
@@ -48,11 +67,11 @@ export const Home = () => {
           variants={itemVariants}
           initial="hidden"
           animate="visible"
-          className="text-2xl md:text-4xl text-gray-700 font-semibold h-16 flex items-center gap-3"
+          className="text-2xl md:text-4xl text-gray-200 font-semibold h-16 flex items-center gap-3"
         >
           <span>I'm a</span>
-          <span className="text-blue-600 font-black">{text}</span>
-          <Cursor cursorColor="#2563eb" cursorStyle="|" />
+          <span className="text-transparent bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text font-black">{text}</span>
+          <Cursor cursorColor="#00d4ff" cursorStyle="|" />
         </motion.div>
 
         {/* Short Bio */}
@@ -60,7 +79,7 @@ export const Home = () => {
           variants={itemVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-2xl text-gray-600 text-lg mt-8 leading-relaxed font-medium"
+          className="max-w-2xl text-gray-300 text-lg mt-8 leading-relaxed font-medium"
         >
           Mera project logic aur clean design par focused hota hai. Main modern web technologies ka use karke scalable and user-friendly solutions banata hoon.
         </motion.p>
@@ -78,7 +97,7 @@ export const Home = () => {
           >
             <NavLink
               to="/contact"
-              className="inline-block bg-gradient-to-r from-gray-900 to-gray-800 text-white px-10 py-4 rounded-full font-bold hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 backdrop-blur-sm border border-gray-700/50"
+              className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-10 py-4 rounded-full font-bold hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 backdrop-blur-sm border border-purple-400/50"
             >
               💼 Hire Me
             </NavLink>
@@ -89,7 +108,7 @@ export const Home = () => {
           >
             <NavLink
               to="/service"
-              className="inline-block border-2 border-blue-600 text-blue-600 px-10 py-4 rounded-full font-bold hover:bg-blue-50 transition-all duration-300 backdrop-blur-sm hover:shadow-lg hover:shadow-blue-200/50"
+              className="inline-block border-2 border-cyan-400 text-cyan-400 px-10 py-4 rounded-full font-bold hover:bg-cyan-400/10 transition-all duration-300 backdrop-blur-sm hover:shadow-lg hover:shadow-cyan-500/30"
             >
               🚀 View Projects
             </NavLink>
@@ -101,7 +120,7 @@ export const Home = () => {
           variants={itemVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-24 border-t border-gray-200/50 pt-16 w-full max-w-5xl"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-24 border-t border-purple-500/30 pt-16 w-full max-w-5xl"
         >
           {[
             { num: "5+", label: "Projects", icon: "🎯" },
@@ -112,15 +131,16 @@ export const Home = () => {
             <motion.div
               key={i}
               whileHover={{ y: -8, scale: 1.05 }}
-              className="text-center group cursor-pointer"
+              className="text-center group cursor-pointer p-4 rounded-2xl bg-white/5 border border-purple-400/20 backdrop-blur-sm hover:border-cyan-400/50 hover:bg-cyan-400/5 transition-all"
             >
               <div className="text-4xl mb-2 group-hover:scale-110 transition-transform duration-300">{stat.icon}</div>
-              <h3 className="text-4xl font-black text-gray-900 group-hover:text-blue-600 transition-colors">{stat.num}</h3>
-              <p className="text-gray-500 text-xs uppercase tracking-[0.15em] mt-2 font-bold">{stat.label}</p>
+              <h3 className="text-4xl font-black text-white group-hover:text-cyan-400 transition-colors">{stat.num}</h3>
+              <p className="text-gray-400 text-xs uppercase tracking-[0.15em] mt-2 font-bold">{stat.label}</p>
             </motion.div>
           ))}
         </motion.div>
       </section>
     </main>
+    </Section>
   );
 };
