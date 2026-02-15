@@ -32,4 +32,12 @@ You can enable EmailJS for the contact form so messages are sent directly from t
 
 3. Restart the dev server — the contact page will try EmailJS first and fall back to the server API if keys are not present.
 
+### Example EmailJS template (ready-to-copy)
+
+- Template name: `Portfolio Contact Form`
+- Subject: `New message from {{from_name}} — Portfolio Contact`
+- Required template variables (used by this project): `{{from_name}}`, `{{from_email}}`, `{{message}}`
+
+You can find a ready example template in `docs/emailjs-template.md` (HTML + plain text versions). There is also a sample `.env.local.example` for local testing — copy it to `.env.local` and replace the placeholder values with your EmailJS keys.
+
 
