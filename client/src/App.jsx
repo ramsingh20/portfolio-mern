@@ -24,7 +24,7 @@ import { AdminProjectsAdd } from './pages/Admin-Projects-Add';
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          {/* <Route path="/service" element={<Service />} /> */}
+          <Route path="/service" element={<Service />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path='/logout' element={<Logout />} />

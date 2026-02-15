@@ -30,45 +30,52 @@ export const AdminProjectsAdd = () => {
       });
 
       if (response.ok) {
-        toast.success("Project added successfully!");
+        toast.success("New Project Added! 🚀");
         setData({ service: "", description: "", price: "", provider: "" });
       } else {
-        toast.error("Failed to add project");
+        const errorData = await response.json();
+        toast.error(errorData.message || "Upload failed");
       }
     } catch (error) {
       console.log(error);
+      toast.error("Internal Server Error");
     }
   };
 
   return (
-    <section className="p-8">
+    <section className="p-4 md:p-8">
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">Add New <span className="text-blue-600">Project</span></h1>
+        <div className="mb-10 text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Upload <span className="text-blue-600">Project</span></h1>
+          <p className="text-gray-400 text-xs uppercase tracking-widest font-bold">Admin Dashboard Only</p>
+        </div>
         
-        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6 bg-gray-50 p-10 rounded-[30px] border border-gray-100">
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Project Name</label>
-            <input type="text" name="service" value={data.service} onChange={handleInput} required className="w-full p-4 rounded-2xl border-none focus:ring-2 focus:ring-blue-600 outline-none" placeholder="e.g. E-commerce App" />
-          </div>
+        <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-6">
+          <div className="bg-gray-50 p-8 rounded-[35px] border border-gray-100 shadow-sm space-y-6">
+            <div>
+              <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Title</label>
+              <input type="text" name="service" value={data.service} onChange={handleInput} required className="w-full bg-white border border-gray-200 px-5 py-4 rounded-2xl focus:outline-none focus:border-blue-600 transition-all" placeholder="Project name..." />
+            </div>
 
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Tech Stack</label>
-            <input type="text" name="price" value={data.price} onChange={handleInput} required className="w-full p-4 rounded-2xl border-none focus:ring-2 focus:ring-blue-600 outline-none" placeholder="e.g. React, Node, MongoDB" />
-          </div>
+            <div>
+              <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Tech Stack (comma separated)</label>
+              <input type="text" name="price" value={data.price} onChange={handleInput} required className="w-full bg-white border border-gray-200 px-5 py-4 rounded-2xl focus:outline-none focus:border-blue-600 transition-all" placeholder="e.g. React, Node, Tailwind" />
+            </div>
 
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">GitHub / Live Link</label>
-            <input type="text" name="provider" value={data.provider} onChange={handleInput} required className="w-full p-4 rounded-2xl border-none focus:ring-2 focus:ring-blue-600 outline-none" placeholder="https://github.com/..." />
-          </div>
+            <div>
+              <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">GitHub / Live Link</label>
+              <input type="text" name="provider" value={data.provider} onChange={handleInput} required className="w-full bg-white border border-gray-200 px-5 py-4 rounded-2xl focus:outline-none focus:border-blue-600 transition-all" placeholder="https://..." />
+            </div>
 
-          <div>
-            <label className="block text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Short Description</label>
-            <textarea name="description" value={data.description} onChange={handleInput} required rows="4" className="w-full p-4 rounded-2xl border-none focus:ring-2 focus:ring-blue-600 outline-none" placeholder="Project ke baare mein thoda batayein..."></textarea>
-          </div>
+            <div>
+              <label className="block text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2 ml-1">Brief Description</label>
+              <textarea name="description" value={data.description} onChange={handleInput} required rows="4" className="w-full bg-white border border-gray-200 px-5 py-4 rounded-2xl focus:outline-none focus:border-blue-600 transition-all" placeholder="Explain the project logic..."></textarea>
+            </div>
 
-          <button type="submit" className="w-full bg-gray-900 text-white py-4 rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-lg">
-            Upload to Portfolio
-          </button>
+            <button type="submit" className="w-full bg-gray-900 text-white py-5 rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-xl hover:shadow-blue-100 flex justify-center items-center gap-2">
+              Save Project 💾
+            </button>
+          </div>
         </form>
       </motion.div>
     </section>
