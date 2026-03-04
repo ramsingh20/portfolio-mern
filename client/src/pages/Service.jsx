@@ -40,7 +40,7 @@ export const Service = () => {
             transition={{ delay: 0.2 }}
             className="text-gray-600 max-w-xl mx-auto uppercase tracking-[0.15em] text-xs font-bold"
           >
-            Mera kaam aur meri skills ka ek chota sa overview
+            A small overview of my work and my skills
           </motion.p>
         </motion.div>
 

@@ -106,14 +106,14 @@ export const Contact = () => {
             transition={{ delay: 0.2 }}
             className="text-gray-600 text-lg mb-10 leading-relaxed font-medium"
           >
-            Mera portfolio pasand aaya? Ya koi project discuss karna chahte ho? 
-            Niche diye gaye form ko bharein, main jald hi aapse baat karunga.
+            Did you like my portfolio? Or do you want to discuss some project? 
+            Fill out the form given below, I will talk to you soon.
           </motion.p>
           
           <motion.div className="space-y-6 text-gray-700 font-bold">
             {[
-              { icon: "📍", text: "India" },
-              { icon: "✉️", text: "ram@example.com" }
+              { icon: "📍", text: "Mumbai" },
+              { icon: "✉️", text: "ram02june2003@gmail.com" }
             ].map((item, i) => (
               <motion.p 
                 key={i}

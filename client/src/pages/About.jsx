@@ -1,6 +1,12 @@
 import { useAuth } from "../store/auth";
 import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
+import { PiHandWavingDuotone } from "react-icons/pi";
+import { IoMdDownload } from "react-icons/io";
+import { GoRocket } from "react-icons/go";
+import { SiReact, SiNodedotjs, SiExpress, SiMongodb, SiTailwindcss, SiGit, SiJavascript } from "react-icons/si";
+import { AiOutlineApi } from "react-icons/ai";
+
 
 export const About = () => {
   const { user } = useAuth();
@@ -31,7 +37,7 @@ export const About = () => {
               transition={{ delay: 0.1 }}
               className="text-blue-600 font-black tracking-[0.15em] uppercase text-xs mb-6 flex items-center gap-2"
             >
-              👋 Get to know me
+              <PiHandWavingDuotone size={30} /> Get to know me
             </motion.p>
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
@@ -50,7 +56,7 @@ export const About = () => {
                 animate="visible"
                 className="font-medium"
               >
-                Hi! Main {user ? user.username : "Ram Singh"} hoon. Ek passionate Full Stack Developer jo complex problems ko simple aur beautiful digital solutions mein convert karna pasand karta hai.
+                Hi! I am {user ? user.username : "Ram Singh"}. A passionate Full Stack Developer who likes to convert complex problems into simple and beautiful digital solutions.
               </motion.p>
               <motion.p
                 custom={1}
@@ -59,7 +65,7 @@ export const About = () => {
                 animate="visible"
                 className="font-medium"
               >
-                Mera focus hamesha high-quality code likhne aur user-experience ko prioritize karne par hota hai. Main MERN stack ke saath modern design patterns ka use karta hoon.
+                My focus is always on writing high-quality code and prioritizing user experience. I use modern design patterns with the MERN stack.
               </motion.p>
               <motion.p
                 custom={2}
@@ -68,7 +74,7 @@ export const About = () => {
                 animate="visible"
                 className="font-medium"
               >
-                Jab main coding nahi kar raha hota, tab main nayi frameworks explore karta hoon ya apne UI designs ko refine karta hoon.
+                When I am not coding, I explore new frameworks or improve my UI designs.
               </motion.p>
             </div>
 
@@ -88,9 +94,10 @@ export const About = () => {
               </motion.div>
               <motion.button 
                 whileHover={{ x: 5 }}
-                className="border-b-2 border-blue-600 text-gray-900 font-bold hover:text-blue-600 transition-all"
+                className="border-b-2 border-blue-600 text-gray-900 font-bold hover:text-blue-600 transition-all flex items-center"
               >
-                ⬇️ Download Resume
+                <IoMdDownload className="inline-block mr-2 text-xl" />
+                Download Resume
               </motion.button>
             </motion.div>
           </motion.div>
@@ -152,19 +159,19 @@ export const About = () => {
             viewport={{ once: true }}
             className="text-center text-gray-600 text-lg mb-10 font-medium"
           >
-            Tools and technologies I work with daily 🚀
+            Tools and technologies I work with daily <GoRocket className="inline-block mr-2 text-xl" />
           </motion.p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
-              { name: "React", emoji: "⚛️" },
-              { name: "Node.js", emoji: "🟢" },
-              { name: "Express", emoji: "🚀" },
-              { name: "MongoDB", emoji: "🍃" },
-              { name: "Tailwind", emoji: "🎨" },
-              { name: "Git", emoji: "🔗" },
-              { name: "JavaScript", emoji: "✨" },
-              { name: "REST APIs", emoji: "🔌" }
+              { name: "React", icon: SiReact, color: "text-blue-500 " },
+              { name: "Node.js", icon: SiNodedotjs, color: "text-green-600" },
+              { name: "Express", icon: SiExpress, color: "text-gray-800" },
+              { name: "MongoDB", icon: SiMongodb, color: "text-green-600" },
+              { name: "Tailwind", icon: SiTailwindcss, color: "text-teal-400" },
+              { name: "Git", icon: SiGit, color: "text-orange-600" },
+              { name: "JavaScript", icon: SiJavascript, color: "text-yellow-400" },
+              { name: "REST APIs", icon: AiOutlineApi, color: "text-indigo-600" }
             ].map((skill, i) => (
               <motion.div
                 key={i}
@@ -175,7 +182,9 @@ export const About = () => {
                 whileHover={{ y: -12, scale: 1.05 }}
                 className="bg-white/80 backdrop-blur-md px-6 py-8 rounded-2xl border border-gray-200/50 shadow-lg hover:shadow-2xl hover:shadow-blue-500/20 transition-all text-center group cursor-pointer"
               >
-                <div className="text-4xl mb-3 group-hover:scale-125 transition-transform duration-300">{skill.emoji}</div>
+                <div className="text-4xl mb-3 group-hover:scale-125 transition-transform duration-300 flex justify-center items-center">
+                  <skill.icon className={`w-10 h-10 ${skill.color}`} />
+                </div>
                 <p className="font-bold text-gray-800 text-sm md:text-base">{skill.name}</p>
               </motion.div>
             ))}

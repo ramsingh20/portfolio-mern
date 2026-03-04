@@ -5,6 +5,10 @@ import { GalaxyBackground } from "../components/GalaxyBackground";
 import { ThreeScene } from "../components/ThreeScene";
 import { StyledBadge } from "../components/StyledBadge";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBriefcase } from "@fortawesome/free-solid-svg-icons";
+import { GoRocket } from "react-icons/go";
+import { IoSparklesOutline } from "react-icons/io5";
 
 const Section = styled.div`
   height: 100vh;
@@ -51,7 +55,7 @@ export const Home = () => {
           animate="visible"
           className="bg-gradient-to-r from-purple-600/30 to-blue-600/30 text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-[0.15em] mb-4 border border-purple-400/30 backdrop-blur-md flex items-center gap-4"
         >
-          ✨ Welcome to my universe
+          <IoSparklesOutline size={17} /> Welcome to my universe
           <StyledBadge className="hidden sm:inline-block">Featured</StyledBadge>
         </motion.div>
 
@@ -89,7 +93,7 @@ export const Home = () => {
           animate="visible"
           className="max-w-2xl text-gray-300 text-lg mt-8 leading-relaxed font-medium"
         >
-          Mera project logic aur clean design par focused hota hai. Main modern web technologies ka use karke scalable and user-friendly solutions banata hoon.
+          My project is focused on logic and clean design. I create scalable and user-friendly solutions using modern web technologies.
         </motion.p>
 
         {/* Call to Action Buttons */}
@@ -107,7 +111,7 @@ export const Home = () => {
               to="/contact"
               className="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-10 py-4 rounded-full font-bold hover:shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 backdrop-blur-sm border border-purple-400/50"
             >
-              💼 Hire Me
+              <FontAwesomeIcon icon={faBriefcase} /> Hire Me
             </NavLink>
           </motion.div>
           <motion.div
@@ -118,7 +122,7 @@ export const Home = () => {
               to="/service"
               className="inline-block border-2 border-cyan-400 text-cyan-400 px-10 py-4 rounded-full font-bold hover:bg-cyan-400/10 transition-all duration-300 backdrop-blur-sm hover:shadow-lg hover:shadow-cyan-500/30"
             >
-              🚀 View Projects
+              <GoRocket className="inline-block mr-2 text-xl text-yellow-300" /> View Projects
             </NavLink>
           </motion.div>
         </motion.div>
